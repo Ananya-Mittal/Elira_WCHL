@@ -10,7 +10,8 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import SellerLogin from "./components/auth/SellerLogin";
 import SellerSignup from "./components/auth/SellerSignup";
-
+import Chatbot from "./components/chatbot/chatbot";
+import DigitalLearning from "./components/DigitalLearning/DigitalLearning";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <div>
           <Navbar />
         </div>
+
         <Routes>
           <Route path="/item/:id" element={<ItemDetail />} />
           <Route path="/cart" element={<Cart />} />
@@ -26,14 +28,18 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          
+          <Route path="/DigitalLearning" element={<DigitalLearning />} />
+
           {/* Seller Routes */}
           <Route path="/seller/login" element={<SellerLogin />} />
           <Route path="/seller/signup" element={<SellerSignup />} />
-          
-          
-          <Route exact path="/" element={<HomePage />} />
+
+          {/* Home */}
+          <Route path="/" element={<HomePage />} />
         </Routes>
+
+        {/* Global Chatbot (visible on all pages) */}
+        <Chatbot />
       </BrowserRouter>
     </div>
   );

@@ -1,18 +1,21 @@
-import React from "react";
-import items from "../../mockData/items.json";
-import ItemList from "../itemList/ItemList";
-import "./HomePage.css";
+import React from 'react';
+import './HomePage.css';
+import HeroBanner from './HeroBanner';
+import CategoryBrowser from './CategoryBrowse';
+import ProductSection from './ProductSection';
+import BrandStrip from './BrandStrip';
 
-function HomePage() {
+const HomePage = () => {
   return (
-    <section className="home-container">
-      <div className="hero-section">
-        <h1>Welcome to Our Collection</h1>
-        <p>Discover our carefully curated items just for you</p>
+    <div className="homepage">
+      <HeroBanner />
+      <div className="homepage-content">
+        <CategoryBrowser />
+        <ProductSection />
+        <BrandStrip />
       </div>
-      <ItemList items={items} />
-    </section>
+    </div>
   );
-}
+};
 
 export default HomePage;
