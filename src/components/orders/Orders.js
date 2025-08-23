@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../context/GlobalState";
+import { Link, useNavigate } from "react-router-dom";
+//import "./Orders.css";
 
 function Orders() {
-  const { orders = [] } = useContext(GlobalContext); // default empty array
-
-  if (!orders.length) {
-    return <div>No orders yet.</div>;
-  }
-
+  const { orders } = useContext(GlobalContext);
   return (
     <div className="cart-list">
       {orders.map((order) => (

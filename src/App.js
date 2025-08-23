@@ -10,8 +10,10 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import SellerLogin from "./components/auth/SellerLogin";
 import SellerSignup from "./components/auth/SellerSignup";
+import SellerDashboard from "./components/seller/SellerDashboard";
 import Chatbot from "./components/chatbot/chatbot";
 import DigitalLearning from "./components/DigitalLearning/DigitalLearning";
+import Wishlist from "./components/Wishlist/Wishlist"
 
 function App() {
   return (
@@ -29,10 +31,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/DigitalLearning" element={<DigitalLearning />} />
+          <Route path="/Wishlist" element={<Wishlist />} />
 
           {/* Seller Routes */}
           <Route path="/seller/login" element={<SellerLogin />} />
           <Route path="/seller/signup" element={<SellerSignup />} />
+           <Route path="/seller/SellerDashboard" element={<SellerDashboard />} />
 
           {/* Home */}
           <Route path="/" element={<HomePage />} />
@@ -46,3 +50,8 @@ function App() {
 }
 
 export default App;
+
+
+
+
+

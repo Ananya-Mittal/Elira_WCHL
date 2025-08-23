@@ -62,10 +62,9 @@ const DigitalLearning = () => {
           <div className="module-card module-card-purple">
             <div className="module-card-overlay module-card-overlay-purple"></div>
             <div className="module-content">
-              <h2 className="module-title">Web Development Essentials</h2>
+              <h2 className="module-title">How to become seller on Elira</h2>
               <p className="module-description">
-                Learn the fundamentals of modern web development with HTML, CSS,
-                and JavaScript.
+                Learn the fundamentals of buisness and how to start working on Elira.
               </p>
               <button className="module-button module-button-purple">
                 Explore →
@@ -92,8 +91,7 @@ const DigitalLearning = () => {
             <div className="module-content">
               <h2 className="module-title">Artificial Intelligence Basics</h2>
               <p className="module-description">
-                Start your journey into AI and machine learning with beginner
-                friendly tutorials.
+                Learn how AI will help you grow your buisness on Elira.
               </p>
               <button className="module-button module-button-blue">
                 Explore →
