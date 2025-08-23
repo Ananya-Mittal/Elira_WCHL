@@ -7,61 +7,70 @@ const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    rememberMe: false
+    rememberMe: false,
   });
-  
-  const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
-  // Assuming you have user authentication in your GlobalContext
-  const { loginUser } = useContext(GlobalContext);
 
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { loginUser } = useContext(GlobalContext); // context authentication
+
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
+  // Validation
   const validate = () => {
     const newErrors = {};
-    
+
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email address is invalid";
     }
-    
+
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters";
     }
-    
+
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  // Form Submit
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    setErrors({});
+    setLoading(true);
+
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      setLoading(false);
       return;
     }
-    
-    // Mock login functionality
-    // In a real app, you would call your loginUser function from context
-    console.log("Logging in with:", formData);
-    
-    // Simulate successful login
-    setTimeout(() => {
-      // If you have a loginUser function in your context
-      // loginUser({ email: formData.email });
-      
-      // Redirect to home page after successful login
-      navigate('/');
-    }, 1000);
+
+    try {
+      // Call your global context login function (backend integration here)
+      // await loginUser(formData);
+
+      console.log("Logging in with:", formData);
+
+      // Simulate successful login
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+    } catch (err) {
+      setErrors({ general: "Invalid email or password. Please try again." });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -71,8 +80,12 @@ const Login = () => {
           <h2>Welcome Back</h2>
           <p>Login to access your account</p>
         </div>
-        
+
         <form className="auth-form" onSubmit={handleSubmit}>
+          {errors.general && (
+            <div className="error-message global-error">{errors.general}</div>
+          )}
+
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -84,9 +97,11 @@ const Login = () => {
               onChange={handleChange}
               className={errors.email ? "input-error" : ""}
             />
-            {errors.email && <span className="error-message">{errors.email}</span>}
+            {errors.email && (
+              <span className="error-message">{errors.email}</span>
+            )}
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -98,9 +113,11 @@ const Login = () => {
               onChange={handleChange}
               className={errors.password ? "input-error" : ""}
             />
-            {errors.password && <span className="error-message">{errors.password}</span>}
+            {errors.password && (
+              <span className="error-message">{errors.password}</span>
+            )}
           </div>
-          
+
           <div className="form-extras">
             <div className="remember-me">
               <input
@@ -116,12 +133,12 @@ const Login = () => {
               Forgot Password?
             </Link>
           </div>
-          
-          <button type="submit" className="auth-button">
-            Login
+
+          <button type="submit" className="auth-button" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
-        
+
         <div className="social-auth">
           <p>Or login with</p>
           <div className="social-buttons">
@@ -135,10 +152,10 @@ const Login = () => {
             </button>
           </div>
         </div>
-        
+
         <div className="auth-footer">
           <p>
-            Don't have an account?{" "}
+            Don’t have an account?{" "}
             <Link to="/signup" className="auth-link">
               Sign up
             </Link>
