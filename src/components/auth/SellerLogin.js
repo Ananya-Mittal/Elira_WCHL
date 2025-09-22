@@ -13,7 +13,7 @@ const SellerLogin = () => {
     e.preventDefault();
     try {
       await loginSeller(formData);
-      navigate("/seller/dashboard"); // ✅ redirect after login
+      navigate("/seller/SellerDashboard"); // ✅ redirect after login
     } catch (err) {
       setError("Invalid email or password");
     }
